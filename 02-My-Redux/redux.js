@@ -3,7 +3,7 @@ function createStore(reducer, ...options) {
 		throw new Error("Reducer function is required");
 
 	let state;
-	let listeners;
+	const listeners = [];
 	const store = {
 		getState() {
 			return state;
@@ -11,14 +11,15 @@ function createStore(reducer, ...options) {
 		dispatch(action) {
 			// console.log(listeners);
 			state = reducer(state, action);
-			// listeners.forEach((listener) => {
-			// 	listener();
-			// });
+			listeners.forEach((listener) => {
+				listener();
+			});
 			// listeners[0]?.();
-			listeners && listeners();
+			// listeners && listeners();
 		},
 		subscribe(listener) {
-			listeners = listener;
+			// listeners = listener;
+			listeners.unshift(listener);
 		},
 	};
 	store.dispatch({ type: "@@Initial" });
