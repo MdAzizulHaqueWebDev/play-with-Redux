@@ -9,10 +9,12 @@ function createStore(reducer, ...options) {
 			return state;
 		},
 		dispatch(action) {
+			console.log(listeners);
 			state = reducer(state, action);
-			listeners.forEach((listener) => {
-				listener();
-			});
+			// listeners.forEach((listener) => {
+			// 	listener();
+			// });
+			listeners[0]?.();
 		},
 		subscribe(listener) {
 			listeners.push(listener);
