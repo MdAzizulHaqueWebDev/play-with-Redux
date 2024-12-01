@@ -2,8 +2,17 @@ function createStore(reducer, ...options) {
 	if (typeof reducer !== "function" || !reducer)
 		throw new Error("Reducer function is required");
 
-	function dispatch(action) {}
-	function getState() {}
+	let state;
+	state = dispatch({ type: "@@INIT" });
+
+	function dispatch(action) {
+		state = reducer(state, action);
+	}
+
+	function getState() {
+		return state;
+	}
+
 	return { dispatch, getState };
 }
 
