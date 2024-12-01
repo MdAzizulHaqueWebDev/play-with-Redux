@@ -13,19 +13,6 @@ function createStore(reducer, ...options) {
 	};
 	state = store.dispatch({ type: "@@Initial" });
 	return store;
-
-	// let state;
-	// state = dispatch({ type: "@@INIT" });
-
-	// function dispatch(action) {
-	// 	state = reducer(state, action);
-	// }
-
-	// function getState() {
-	// 	return state;
-	// }
-
-	// return { dispatch, getState };
 }
 
 export { createStore };
