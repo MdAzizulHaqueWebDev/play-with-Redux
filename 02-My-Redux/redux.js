@@ -3,16 +3,19 @@ function createStore(reducer, ...options) {
 		throw new Error("Reducer function is required");
 
 	let state;
+	const listeners = [];
 	const store = {
 		getState() {
 			return state;
 		},
 		dispatch(action) {
 			state = reducer(state, action);
-			// this.subscribe();
+			listeners.forEach((listener) => {
+				listener();
+			});
 		},
-		subscribe(callback) {
-			typeof callback === "function" && callback();
+		subscribe(listener) {
+			listeners.push(listener);
 		},
 	};
 	store.dispatch({ type: "@@Initial" });
