@@ -9,9 +9,13 @@ function createStore(reducer, ...options) {
 		},
 		dispatch(action) {
 			state = reducer(state, action);
+			// this.subscribe();
+		},
+		subscribe(callback) {
+			typeof callback === "function" && callback();
 		},
 	};
-	state = store.dispatch({ type: "@@Initial" });
+	store.dispatch({ type: "@@Initial" });
 	return store;
 }
 

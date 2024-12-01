@@ -12,12 +12,11 @@ function counterReducer(state = intitialState, action) {
 const counterState = createStore(counterReducer);
 
 console.log(counterState);
-
 console.log(counterState.getState());
 
-counterState.dispatch({ type: "count/increment" });
-console.log(counterState.getState());
-counterState.dispatch({ type: "count/increment" });
-console.log(counterState.getState());
-counterState.dispatch({ type: "count/increment" });
-console.log(counterState.getState());
+// counterState.dispatch({ type: "count/increment" });
+// console.log(counterState.getState());
+
+// counterState.subscribe(() => {
+// 	console.log(counterState.getState());
+// });
