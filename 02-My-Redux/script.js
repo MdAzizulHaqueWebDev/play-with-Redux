@@ -13,9 +13,12 @@ const counterState = createStore(counterReducer);
 
 console.log(counterState);
 
-counterState.subscribe(() => {
+const unsubcribe1 = counterState.subscribe(() => {
 	console.log(counterState.getState());
 });
-
+const unsubcribe2 = counterState.subscribe(() => {
+	console.log(counterState.getState(), "unsubscribe 2");
+});
 counterState.dispatch({ type: "count/increment" });
+unsubcribe2();
 counterState.dispatch({ type: "count/increment" });

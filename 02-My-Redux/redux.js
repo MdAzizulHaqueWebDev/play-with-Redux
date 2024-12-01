@@ -9,7 +9,7 @@ function createStore(reducer, ...options) {
 			return state;
 		},
 		dispatch(action) {
-			// console.log(listeners);
+			console.log(listeners);
 			state = reducer(state, action);
 			listeners.forEach((listener) => {
 				listener();
@@ -19,7 +19,13 @@ function createStore(reducer, ...options) {
 		},
 		subscribe(listener) {
 			// listeners = listener;
-			listeners.unshift(listener);
+			listeners.push(listener);
+			return () => {
+				const listenerIndex = listeners.findIndex(
+					(lisnr) => lisnr === listener,
+				);
+				listeners.splice(listenerIndex, 1);
+			};
 		},
 	};
 	store.dispatch({ type: "@@Initial" });
