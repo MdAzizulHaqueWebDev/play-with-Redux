@@ -24,7 +24,7 @@ function reducer(state = intitialState, action) {
 			return state;
 	}
 }
-
+// window.__REDUX_DEVTOOLS_EXTENSION__?.()
 const reduxStore = createStore(
 	reducer,
 	window.__REDUX_DEVTOOLS_EXTENSION__?.(),
