@@ -1,33 +1,45 @@
 import { createStore } from "redux";
+const renderCount = document.querySelector("#render-count");
 
 const intitialState = {
 	count: 0,
 	name: "Azizul",
 	age: 18,
 };
-
+const INCREMENT = "count/increment";
+const INCREMENT_BY = "count/incrementBy";
+const DECREMENT = '"count/decrement"';
+const DECREMENT_BY = "count/decrementby";
 function reducer(state = intitialState, action) {
 	switch (action.type) {
-		case "count/increment":
+		case INCREMENT:
 			return { ...state, count: state.count + 1 };
-		case "count/incrementBy":
+		case INCREMENT_BY:
 			return { ...state, count: state.count + action.payload };
-		case "count/decrement":
+		case DECREMENT:
 			return { ...state, count: state.count - 1 };
+		case DECREMENT_BY:
+			return { ...state, count: state.count - action.payload };
 		default:
 			return state;
 	}
 }
 
-const reduxStore = createStore(reducer);
+const reduxStore = createStore(
+	reducer,
+	window.__REDUX_DEVTOOLS_EXTENSION__?.(),
+);
 
 // reduxStore.dispatch({ type: "", payload: 10 });
 // console.log(reduxStore);
-
+renderCount.addEventListener("click", () => {
+	reduxStore.dispatch({ type: DECREMENT_BY, payload: 2 });
+});
 reduxStore.subscribe(() => {
+	renderCount.innerText = reduxStore.getState().count;
 	console.log(reduxStore.getState());
 });
-reduxStore.dispatch({ type: "count/increment" });
-reduxStore.dispatch({ type: "count/increment" });
-reduxStore.dispatch({ type: "count/decrement" });
-reduxStore.dispatch({ type: "count/incrementBy", payload: 14 });
+reduxStore.dispatch({ type: INCREMENT });
+reduxStore.dispatch({ type: INCREMENT });
+reduxStore.dispatch({ type: DECREMENT });
+reduxStore.dispatch({ type: INCREMENT_BY, payload: 14 });
