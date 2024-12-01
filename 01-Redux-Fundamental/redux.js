@@ -35,10 +35,11 @@ const reduxStore = createStore(
 renderCount.addEventListener("click", () => {
 	reduxStore.dispatch({ type: DECREMENT_BY, payload: 2 });
 });
-reduxStore.subscribe(() => {
+const unsubcribe = reduxStore.subscribe(() => {
 	renderCount.innerText = reduxStore.getState().count;
 	console.log(reduxStore.getState());
 });
+// unsubcribe();
 reduxStore.dispatch({ type: INCREMENT });
 reduxStore.dispatch({ type: INCREMENT });
 reduxStore.dispatch({ type: DECREMENT });
