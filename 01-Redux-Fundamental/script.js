@@ -31,12 +31,12 @@ let reduxState = {
 // dynamically state change by action
 function reducer(state, action) {
 	if (!action?.type) throw new Error("Action type expected");
-	switch (action) {
-		case action.type === "count/increment":
+	switch (action.type) {
+		case "count/increment":
 			return { ...state, count: state.count + 1 };
-		case action.type === "count/incrementBy":
+		case "count/incrementBy":
 			return { ...state, count: state.count + action.payload };
-		case action.type === "count/decrement":
+		case "count/decrement":
 			return { ...state, count: state.count - 1 };
 		default:
 			return state;
