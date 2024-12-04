@@ -5,7 +5,7 @@ import {
 	CART_REMOVE_ITEM,
 } from "../app";
 
-export function cartReducer(state = [], { type, payload }) {
+export default function cartReducer(state = [], { type, payload }) {
 	switch (type) {
 		case CART_ADD_ITEM:
 			return [...state, payload];
