@@ -9,7 +9,6 @@ import cartReducer, {
 	CART_REMOVE_ITEM,
 } from "./reducers/cartReducer";
 import wishlistReducer, { WISHLIST_ADD_ITEM } from "./reducers/wishlistReducer";
-import Action from "./actionCreator";
 
 const reducer = combineReducers({
 	products: productsReducer,
@@ -56,13 +55,7 @@ store.dispatch({
 		quantity: 10,
 	},
 });
-// store.dispatch(
-// 	new Action(CART_ADD_ITEM, {
-// 		productId: 2,
-// 		quantity: 1,
-// 	}),
-// );
-console.log(new Action(CART_ADD_ITEM, { product: 10 }));
+
 store.dispatch({
 	type: CART_ADD_ITEM,
 	payload: {
