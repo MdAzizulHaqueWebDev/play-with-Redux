@@ -7,6 +7,8 @@ import cartReducer, {
 	CART_DECREASE_ITEM,
 	CART_INCREASE_ITEM,
 	CART_REMOVE_ITEM,
+	cartAddItem,
+	cartRemoveItem,
 } from "./reducers/cartReducer";
 import wishlistReducer, { WISHLIST_ADD_ITEM } from "./reducers/wishlistReducer";
 
@@ -34,20 +36,8 @@ store.dispatch({
 		},
 	},
 });
-store.dispatch({
-	type: CART_ADD_ITEM,
-	payload: {
-		productId: 2,
-		quantity: 1,
-	},
-});
-store.dispatch({
-	type: CART_ADD_ITEM,
-	payload: {
-		productId: 5,
-		quantity: 1,
-	},
-});
+store.dispatch(cartAddItem(2, 1));
+
 store.dispatch({
 	type: CART_ADD_ITEM,
 	payload: {
@@ -78,12 +68,7 @@ store.dispatch({
 	},
 });
 
-store.dispatch({
-	type: CART_REMOVE_ITEM,
-	payload: {
-		productId: 14,
-	},
-});
+store.dispatch(cartRemoveItem(2));
 store.dispatch({
 	type: CART_INCREASE_ITEM,
 	payload: {
