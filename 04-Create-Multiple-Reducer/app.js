@@ -3,18 +3,16 @@ import { productsReducer } from "./reducers/productsReducer";
 import { cartReducer } from "./reducers/cartReducer";
 import { wishlistReducer } from "./reducers/wishlistReducer";
 
-// const intialState = {
-// 	products: products,
-// 	cartItems: [],
-// 	wishlist: [4, 4, 2, 13],
-// };
+// products api
+export const PRODUCT_ADD_PRODUCT = "product/addProduct";
 // cart api
 export const CART_ADD_ITEM = "cart/addItem";
 export const CART_REMOVE_ITEM = "cart/removeItem";
 export const CART_INCREASE_ITEM = "cart/increaseItem";
 export const CART_DECREASE_ITEM = "cart/decreaseItem";
-// products api
-export const PRODUCT_ADD_PRODUCT = "product/addProduct";
+// wishlist api
+export const WISHLIST_ADD_ITEM = "wishlist/addItem";
+
 const reducer = combineReducers({
 	products: productsReducer,
 	cartItems: cartReducer,
@@ -22,7 +20,7 @@ const reducer = combineReducers({
 });
 
 const store = createStore(reducer, window?.__REDUX_DEVTOOLS_EXTENSION__());
-
+store.dispatch({ type: WISHLIST_ADD_ITEM, payload: 1 });
 store.dispatch({
 	type: PRODUCT_ADD_PRODUCT,
 	payload: {
