@@ -1,8 +1,8 @@
-import { combineReducerss, createStore } from "redux";
+import { createStore } from "redux";
 import productsReducer from "./reducers/productsReducer";
 import cartReducer from "./reducers/cartReducer";
 import wishlistReducer from "./reducers/wishlistReducer";
-
+import combineReducers from "./combineReducers";
 // products api
 export const PRODUCT_ADD_PRODUCT = "product/addProduct";
 // cart api
