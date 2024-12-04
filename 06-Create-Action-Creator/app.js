@@ -1,18 +1,15 @@
-import { createStore } from "redux";
-import productsReducer from "./reducers/productsReducer";
-import cartReducer from "./reducers/cartReducer";
-import wishlistReducer from "./reducers/wishlistReducer";
-import combineReducers from "./combineReducers";
+import { combineReducers, createStore } from "redux";
+import productsReducer, {
+	PRODUCT_ADD_PRODUCT,
+} from "./reducers/productsReducer";
+import cartReducer, {
+	CART_ADD_ITEM,
+	CART_DECREASE_ITEM,
+	CART_INCREASE_ITEM,
+	CART_REMOVE_ITEM,
+} from "./reducers/cartReducer";
+import wishlistReducer, { WISHLIST_ADD_ITEM } from "./reducers/wishlistReducer";
 import Action from "./actionCreator";
-// products api
-export const PRODUCT_ADD_PRODUCT = "product/addProduct";
-// cart api
-export const CART_ADD_ITEM = "cart/addItem";
-export const CART_REMOVE_ITEM = "cart/removeItem";
-export const CART_INCREASE_ITEM = "cart/increaseItem";
-export const CART_DECREASE_ITEM = "cart/decreaseItem";
-// wishlist api
-export const WISHLIST_ADD_ITEM = "wishlist/addItem";
 
 const reducer = combineReducers({
 	products: productsReducer,
@@ -59,12 +56,13 @@ store.dispatch({
 		quantity: 10,
 	},
 });
-store.dispatch(
-	Action(CART_ADD_ITEM, {
-		productId: 2,
-		quantity: 1,
-	}),
-);
+// store.dispatch(
+// 	new Action(CART_ADD_ITEM, {
+// 		productId: 2,
+// 		quantity: 1,
+// 	}),
+// );
+console.log(new Action(CART_ADD_ITEM, { product: 10 }));
 store.dispatch({
 	type: CART_ADD_ITEM,
 	payload: {

@@ -1,9 +1,8 @@
-import {
-	CART_ADD_ITEM,
-	CART_DECREASE_ITEM,
-	CART_INCREASE_ITEM,
-	CART_REMOVE_ITEM,
-} from "../app";
+// cart api
+export const CART_ADD_ITEM = "cart/addItem";
+export const CART_REMOVE_ITEM = "cart/removeItem";
+export const CART_INCREASE_ITEM = "cart/increaseItem";
+export const CART_DECREASE_ITEM = "cart/decreaseItem";
 
 export default function cartReducer(state = [], { type, payload }) {
 	switch (type) {

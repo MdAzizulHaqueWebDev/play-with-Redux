@@ -1,4 +1,5 @@
-import { WISHLIST_ADD_ITEM } from "../app";
+// wishlist api
+export const WISHLIST_ADD_ITEM = "wishlist/addItem";
 
 export default function wishlistReducer(state = [], { type, payload }) {
 	switch (type) {
