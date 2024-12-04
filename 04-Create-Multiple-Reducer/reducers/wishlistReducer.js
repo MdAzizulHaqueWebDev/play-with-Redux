@@ -1,3 +1,3 @@
-export function wishlistReducer(state, action) {
+export function wishlistReducer(state = [], action) {
 	return state;
 }
