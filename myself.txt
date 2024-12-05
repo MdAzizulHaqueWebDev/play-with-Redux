@@ -1,2 +1,4 @@
+---
 Hey There , Asslamu Alaikum 
 I am Azizul a MERN Engineer
+I have strong knowledge about javascript
