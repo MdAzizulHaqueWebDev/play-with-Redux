@@ -1,5 +1,5 @@
 import { combineReducers, createStore } from "redux";
-import productsReducer from "./productsReducer";
+import productsReducer from "./productsReducer.js";
 import cartReducer, {
 	addCartItem,
 	decreaseCartItemQuantity,
@@ -8,7 +8,7 @@ import cartReducer, {
 import wishListReducer, {
 	addWishListItem,
 	removeWishListItem,
-} from "../wishListReducer";
+} from "./wishListReducer";
 
 const reducer = combineReducers({
 	products: productsReducer,
@@ -16,7 +16,10 @@ const reducer = combineReducers({
 	wishList: wishListReducer,
 });
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__?.());
+export const store = createStore(
+	reducer,
+	window.__REDUX_DEVTOOLS_EXTENSION__?.(),
+);
 const { dispatch } = store;
 dispatch(addCartItem(1));
 dispatch(addCartItem(12));
