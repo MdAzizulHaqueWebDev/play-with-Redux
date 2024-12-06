@@ -5,7 +5,7 @@ const CART_ITEM_INCREASE_QUANTITY = "cart/increaseItemQuantity";
 const CART_ITEM_DECREASE_QUANTITY = "cart/decreaseItemQuantity";
 
 // Action Creators
-export function addCartItem(product, quantity = 1) {
+export function addCartItem(product) {
 	return { type: CART_ADD_ITEM, payload: product };
 }
 

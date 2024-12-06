@@ -29,14 +29,14 @@ export default function Cart() {
 	// 		price: 15.99,
 	// 	},
 	// ];
-	const { products, cartItems } = useSelector((state) => state);
+	const { cartItems } = useSelector((state) => state);
 	// problem : we can't get quantity and others props when use added carts
 	// const carts = products.filter((product) =>
 	// 	cartItems.some((item) => item.productId === product.id),
 	// );
 	// console.log(carts);
 
-	// console.log(cartItems);
+	console.log(cartItems);
 	return (
 		<div className="cart-container">
 			<h2>Items in Your Cart</h2>
@@ -47,16 +47,19 @@ export default function Cart() {
 					<div className="quantity">Quantity</div>
 					<div className="total">Total</div>
 				</div>
-				{cartItems.map(({ id, title, rating, price, imageUrl, quantity }) => (
-					<CartItem
-						key={id}
-						title={title}
-						price={price}
-						quantity={quantity}
-						imageUrl={imageUrl}
-						rating={rating}
-					/>
-				))}
+				{cartItems.map(
+					({ productId, title, rating, price, imageUrl, quantity }) => (
+						<CartItem
+							key={productId}
+							productId={productId}
+							title={title}
+							price={price}
+							quantity={quantity}
+							imageUrl={imageUrl}
+							rating={rating}
+						/>
+					),
+				)}
 				<div className="cart-header cart-item-container">
 					<div></div>
 					<div></div>
