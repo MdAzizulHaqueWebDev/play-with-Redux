@@ -25,7 +25,14 @@ export default function CartItem({
 			</div>
 			<div className="item-price">${price}</div>
 			<div className="item-quantity">
-				<button onClick={() => dispatch(decreaseCartItemQuantity(productId))}>
+				<button
+					onClick={() => {
+						if (quantity <= 1) {
+							if (confirm(`Are You Sure Remove this: ${title}`)) return;
+						}
+						dispatch(decreaseCartItemQuantity(productId));
+					}}
+				>
 					-
 				</button>
 				<span>{quantity}</span>
