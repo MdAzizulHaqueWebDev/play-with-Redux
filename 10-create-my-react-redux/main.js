@@ -29,7 +29,7 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.querySelector("#root")).render(
-	<Provider store={store}>
+	<Provider reduxStore={store}>
 		<RouterProvider router={router} />
 	</Provider>,
 );
