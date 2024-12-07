@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Fireworks</title>
+		<!-- jsDelivr  -->
+		<script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+
+		<!-- UNPKG -->
+		<script src="https://unpkg.com/fireworks-js@2.x/dist/index.umd.js"></script>
+	</head>
+	<body>
+		<h2>Fireworks</h2>
+		<div class="fireworks"></div>
+	</body>
+	<!-- Usage -->
+	<script>
+		const container = document.querySelector(".fireworks");
+		const fireworks = new Fireworks.default(container);
+		fireworks.start();
+	</script>
+</html>
