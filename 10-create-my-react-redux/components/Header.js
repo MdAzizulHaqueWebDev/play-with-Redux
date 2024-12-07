@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import CartIcon from "../assets/cart-icon.svg";
-import { useSelector } from "react-redux";
+import { useSelector } from "../react-redux";
 import heartIcon from "../assets/heart.png";
 
 export default function Header() {

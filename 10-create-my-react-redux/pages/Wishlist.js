@@ -1,5 +1,4 @@
-import { useSelector } from "react-redux";
-import CartItem from "../components/CartItem";
+import { useSelector } from "../react-redux";
 import WishlistItem from "../components/WishlistItem";
 
 const Wishlist = () => {

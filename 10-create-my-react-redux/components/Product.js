@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../react-redux";
 import { addCartItem } from "../store/cartReducer";
 import heartIcon from "../assets/heart.png";
 import { addWishListItem } from "../store/wishListReducer";
