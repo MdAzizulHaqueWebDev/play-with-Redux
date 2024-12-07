@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 // import { createContext, useContext, useEffect, useState } from "react";
 // const ReduxContext = createContext(null);
@@ -29,10 +29,14 @@ import { createContext, useContext } from "react";
 
 const ReduxContext = createContext(null);
 export const Provider = ({ reduxStore, children }) => {
-	reduxStore.subscribe(() => {});
+	const [state, setState] = useState(store.getState());
+
+	reduxStore.subscribe(() => {
+		setState(reduxStore.getState());
+	});
 	return (
 		<ReduxContext.Provider
-			value={{ state: reduxStore.getState(), dispatch: reduxStore.dispatch }}
+			value={{ state: state, dispatch: reduxStore.dispatch }}
 		>
 			{children}
 		</ReduxContext.Provider>
