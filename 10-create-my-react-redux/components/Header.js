@@ -6,6 +6,7 @@ import heartIcon from "../assets/heart.png";
 
 export default function Header() {
 	const { cartItems, wishList } = useSelector((state) => state);
+	console.log("re-rendered");
 	return (
 		<header>
 			<div className="header-contents">
