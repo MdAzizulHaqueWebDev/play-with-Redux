@@ -29,7 +29,7 @@ import { createContext, useContext, useState } from "react";
 
 const ReduxContext = createContext(null);
 export const Provider = ({ reduxStore, children }) => {
-	const [state, setState] = useState(store.getState());
+	const [state, setState] = useState(reduxStore.getState());
 
 	reduxStore.subscribe(() => {
 		setState(reduxStore.getState());
