@@ -47,22 +47,15 @@ export default function cartReducer(baseState = [], action) {
 				state.splice(existItemIndx, 1);
 				return state;
 			case CART_ITEM_INCREASE_QUANTITY:
-				return state.map((cartItem) => {
-					if (cartItem.productId === action.payload.productId) {
-						return { ...cartItem, quantity: cartItem.quantity + 1 };
-					}
-					return cartItem;
-				});
-
+				state[existItemIndx].quantity += 1;
+				return state;
 			case CART_ITEM_DECREASE_QUANTITY:
-				return state
-					.map((cartItem) => {
-						if (cartItem.productId === action.payload.productId) {
-							return { ...cartItem, quantity: cartItem.quantity - 1 };
-						}
-						return cartItem;
-					})
-					.filter((cartItem) => cartItem.quantity > 0);
+				state[existItemIndx].quantity -= 1;
+				if (state[existItemIndx].quantity === 0) {
+					state.splice(existItemIndx, 1);
+				}
+
+				return state;
 			default:
 				return state;
 		}
