@@ -39,25 +39,24 @@ export default function cartReducer(baseState = [], action) {
 			case CART_ADD_ITEM:
 				if (existItemIndx !== -1) {
 					state[existItemIndx].quantity += 1;
-					return state;
+					break;
 				}
 				state.push({ ...action.payload, quantity: 1 });
-				return state;
+				break;
 			case CART_REMOVE_ITEM:
 				state.splice(existItemIndx, 1);
-				return state;
+				break;
 			case CART_ITEM_INCREASE_QUANTITY:
 				state[existItemIndx].quantity += 1;
-				return state;
+				break;
 			case CART_ITEM_DECREASE_QUANTITY:
 				state[existItemIndx].quantity -= 1;
 				if (state[existItemIndx].quantity === 0) {
 					state.splice(existItemIndx, 1);
 				}
 
-				return state;
-			default:
-				return state;
+				break;
 		}
+		return state;
 	});
 }
