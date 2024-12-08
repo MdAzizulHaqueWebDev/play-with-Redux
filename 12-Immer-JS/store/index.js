@@ -1,15 +1,8 @@
 import { combineReducers, createStore } from "redux";
 import productsReducer from "./slices/productsReducer";
-import cartReducer, {
-	addCartItem,
-	decreaseCartItemQuantity,
-	increaseCartItemQuantity,
-} from "./slices/cartReducer";
-import wishListReducer, {
-	addWishListItem,
-	removeWishListItem,
-} from "./slices/wishListReducer";
-
+import cartReducer from "./slices/cartReducer";
+import wishListReducer from "./slices/wishListReducer";
+import { produce } from "immer";
 const reducer = combineReducers({
 	products: productsReducer,
 	cartItems: cartReducer,
@@ -21,18 +14,35 @@ export const store = createStore(
 	window.__REDUX_DEVTOOLS_EXTENSION__?.(),
 );
 
-// console.log(store)
+const users = [
+	{
+		name: "azizul",
+		age: 17,
+		setting: { theme: "dark" },
+	},
+	{
+		name: "mozammal",
+		age: 18,
+		setting: { theme: "light" },
+	},
+];
 
-// store.dispatch(addCartItem(1))
-// store.dispatch(addCartItem(12))
+// users[1].age = 20;
+// const newUsers = users.map((user, indx) =>
+// 	indx == 1 ? { ...user, age: 20 } : user,
+// );
+// console.log(newUsers);
+// console.log(users);
 
-// store.dispatch(increaseCartItemQuantity(12))
+// ----------- ekane kunu operation hoi eta sudu return kore
+// console.log(users, "old users");
+// produce(users, (draft) => {
+// 	draft[1].age = 20;
+// });
+// console.log(users, "new users");
 
-// store.dispatch(decreaseCartItemQuantity(12))
-// store.dispatch(decreaseCartItemQuantity(12))
-
-// store.dispatch(addWishListItem(18))
-// store.dispatch(addWishListItem(11))
-
-// store.dispatch(removeWishListItem(11))
-// store.dispatch(removeWishListItem(18))
+// const newUsers = produce(users, (draft) => {
+// 	draft[1].age = 20;
+// });
+// console.log(users, "old users");
+// console.log(newUsers, "new users");

@@ -28,7 +28,7 @@ export default function CartItem({
 				<button
 					onClick={() => {
 						if (quantity <= 1) {
-							if (confirm(`Are You Sure Remove this: ${title}`)) return;
+							if (!confirm(`Are You Sure Remove this: ${title}`)) return;
 						}
 						dispatch(decreaseCartItemQuantity(productId));
 					}}
