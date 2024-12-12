@@ -7,7 +7,7 @@ export default function Product({ productId, title, rating, price, imageUrl }) {
 	return (
 		<div className="product">
 			<img
-				onClick={() => dispatch(addWishListItem(productId))}
+				onClick={() => dispatch(addWishListItem({ productId }))}
 				className="wish-btn"
 				width={50}
 				src={heartIcon}

@@ -13,7 +13,6 @@ export default function CartItem({
 	quantity,
 }) {
 	const dispatch = useDispatch();
-	console.log(productId);
 	return (
 		<div className="cart-item-container">
 			<div className="cart-item">
@@ -30,13 +29,15 @@ export default function CartItem({
 						if (quantity <= 1) {
 							if (!confirm(`Are You Sure Remove this: ${title}`)) return;
 						}
-						dispatch(decreaseCartItemQuantity(productId));
+						dispatch(decreaseCartItemQuantity({ productId }));
 					}}
 				>
 					-
 				</button>
 				<span>{quantity}</span>
-				<button onClick={() => dispatch(increaseCartItemQuantity(productId))}>
+				<button
+					onClick={() => dispatch(increaseCartItemQuantity({ productId }))}
+				>
 					+
 				</button>
 			</div>
