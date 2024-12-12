@@ -2,7 +2,6 @@ import { combineReducers, createStore } from "redux";
 import productsReducer from "./slices/productsReducer";
 import cartReducer from "./slices/cartReducer";
 import wishListReducer from "./slices/wishListReducer";
-import { produce } from "immer";
 const reducer = combineReducers({
 	products: productsReducer,
 	cartItems: cartReducer,
