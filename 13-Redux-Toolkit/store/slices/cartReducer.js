@@ -1,5 +1,5 @@
 import { produce } from "immer";
-
+import { createSlice } from "@reduxjs/toolkit";
 // Action Types
 export const CART_ADD_ITEM = "cart/addItem";
 const CART_REMOVE_ITEM = "cart/removeItem";
@@ -30,7 +30,7 @@ export function increaseCartItemQuantity(productId) {
 }
 
 // Reducer
-export default function cartReducer(baseState = [], action) {
+function cartReducer(baseState = [], action) {
 	return produce(baseState, (state) => {
 		const existItemIndx = state.findIndex(
 			(item) => item.productId === action.payload.productId,
@@ -59,3 +59,40 @@ export default function cartReducer(baseState = [], action) {
 		return state;
 	});
 }
+
+const findIndex = (state, action) =>
+	state.findIndex((item) => item.productId === action.payload.productId);
+
+const slice = createSlice({
+	name: "cart",
+	initialState: [],
+	reducers: {
+		addItem(state, action) {
+			const existItemIndx = findIndex(state, action);
+
+			if (existItemIndx !== -1) {
+				state[existItemIndx].quantity += 1;
+			}
+			state.push({ ...action.payload, quantity: 1 });
+		},
+		removeItem(state, action) {
+			const existItemIndx = findIndex(state, action);
+			state.splice(existItemIndx, 1);
+		},
+		increaseItemQuantity(state, action) {
+			const existItemIndx = findIndex(state, action);
+			state[existItemIndx].quantity += 1;
+		},
+		decreaseItemQuantity(state, action) {
+			const existItemIndx = findIndex(state, action);
+			state[existItemIndx].quantity -= 1;
+			if (state[existItemIndx].quantity === 0) {
+				state.splice(existItemIndx, 1);
+			}
+		},
+	},
+});
+
+export default slice.reducer;
+
+///
