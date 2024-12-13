@@ -1,8 +1,8 @@
-import { combineReducers, createStore } from "redux";
 import productsReducer from "./slices/productsReducer";
 import cartReducer from "./slices/cartReducer";
 import wishListReducer from "./slices/wishListReducer";
 import { configureStore } from "@reduxjs/toolkit";
+import { logger } from "./middleware/logger";
 
 // const reducer = combineReducers({
 // 	products: productsReducer,
@@ -15,6 +15,9 @@ export const store = configureStore({
 		products: productsReducer,
 		cartItems: cartReducer,
 		wishList: wishListReducer,
+	},
+	middleware: (d) => {
+		return d().concat(logger);
 	},
 });
 

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 const findIndex = (state, action) =>
 	state.findIndex((item) => item.productId === action.payload.productId);
 
@@ -8,9 +9,9 @@ const slice = createSlice({
 	reducers: {
 		addItem(state, action) {
 			const existItemIndx = findIndex(state, action);
-
 			if (existItemIndx !== -1) {
 				state[existItemIndx].quantity += 1;
+				return;
 			}
 			state.push({ ...action.payload, quantity: 1 });
 		},
