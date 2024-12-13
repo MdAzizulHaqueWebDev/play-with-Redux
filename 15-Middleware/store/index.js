@@ -3,32 +3,20 @@ import productsReducer from "./slices/productsReducer";
 import cartReducer from "./slices/cartReducer";
 import wishListReducer from "./slices/wishListReducer";
 import { configureStore } from "@reduxjs/toolkit";
-const reducer = combineReducers({
-	products: productsReducer,
-	cartItems: cartReducer,
-	wishList: wishListReducer,
-});
+
+// const reducer = combineReducers({
+// 	products: productsReducer,
+// 	cartItems: cartReducer,
+// 	wishList: wishListReducer,
+// });
 
 export const store = configureStore({
-	reducers: {
+	reducer: {
 		products: productsReducer,
 		cartItems: cartReducer,
 		wishList: wishListReducer,
 	},
 });
-
-const users = [
-	{
-		name: "azizul",
-		age: 17,
-		setting: { theme: "dark" },
-	},
-	{
-		name: "mozammal",
-		age: 18,
-		setting: { theme: "light" },
-	},
-];
 
 // users[1].age = 20;
 // const newUsers = users.map((user, indx) =>
