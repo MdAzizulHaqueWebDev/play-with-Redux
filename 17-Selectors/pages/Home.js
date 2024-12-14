@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Product from "../components/Product";
+import { selectProductsList } from "../store/slices/productsReducer";
 
 export default function Home() {
-	const productsList = useSelector((state) => state.products);
+	const productsList = useSelector(selectProductsList);
 	return (
 		<div className="products-container">
 			{productsList.map(({ id, title, rating, price, image }) => (

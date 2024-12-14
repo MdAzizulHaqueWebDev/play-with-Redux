@@ -1,16 +1,16 @@
 import React from "react";
 import CartItem from "../components/CartItem";
 import { useSelector } from "react-redux";
+import { selectCartItems } from "../store/slices/cartReducer";
 
 export default function Cart() {
-	const { cartItems } = useSelector((state) => state);
+	const cartItems = useSelector(selectCartItems);
 	// problem : we can't get quantity and others props when use added carts
 	// const carts = products.filter((product) =>
 	// 	cartItems.some((item) => item.productId === product.id),
 	// );
 	// console.log(carts);
 
-	console.log(cartItems);
 	return (
 		<div className="cart-container">
 			<h2>Items in Your Cart</h2>
