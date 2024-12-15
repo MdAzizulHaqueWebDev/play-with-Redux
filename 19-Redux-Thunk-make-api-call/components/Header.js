@@ -2,40 +2,14 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import CartIcon from "../assets/cart-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	fetchProducts,
-	fetchProductsError,
-	updateAllProducts,
-} from "../store/slices/productsSlice";
-import {
-	fetchCartItems,
-	fetchCartItemsError,
-	loadCartItems,
-} from "../store/slices/cartSlice";
-import { fetchAPIAction } from "../store/middleware/API_Middleware";
+import { fetchAllProducts } from "../store/slices/productsSlice";
+import { fetchCarts } from "../store/slices/cartSlice";
 
 export default function Header() {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(
-			fetchAPIAction({
-				path: "/products",
-				onSuccess: updateAllProducts.type,
-				onLoading: fetchProducts.type,
-				onError: fetchProductsError.type,
-			}),
-		);
-		dispatch(
-			fetchAPIAction({
-				path: "/carts/23",
-				onSuccess: loadCartItems.type,
-				onLoading: fetchCartItems.type,
-				onError: fetchCartItemsError.type,
-			}),
-		);
-		dispatch(() => {
-			console.log("pass a function without returned object");
-		});
+		dispatch(fetchAllProducts());
+		dispatch(fetchCarts());
 	}, []);
 	const cartItems = useSelector((state) => state.cartItems.list);
 	return (

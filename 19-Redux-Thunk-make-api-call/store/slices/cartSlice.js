@@ -59,13 +59,23 @@ const selectorFn = ({ products, cartItems }) => {
 export const getCartItems = createSelector(selectorFn, (state) => state);
 
 export const {
-	fetchCartItemsError,
-	fetchCartItems,
-	loadCartItems,
 	addCartItem,
 	removeCartItem,
 	increaseCartItemQuantity,
 	decreaseCartItemQuantity,
 } = slice.actions;
+const { fetchCartItemsError, fetchCartItems, loadCartItems } = slice.actions;
+export const fetchCarts = () => (dispatch) => {
+	dispatch(fetchCartItems());
+	fetch("http://localhost:3000/carts/5")
+		.then((res) => res.json())
+		.then((data) => {
+			console.log(data);
+			dispatch(loadCartItems(data));
+		})
+		.catch((er) => {
+			fetchCartItemsError(er.message || "something went wrong");
+		});
+};
 
 export default slice.reducer;

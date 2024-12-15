@@ -12,8 +12,7 @@ export const store = configureStore({
 		wishList: wishListReducer,
 	},
 	middleware: (getDefaults) => {
-		console.log("redux default middlewares", getDefaults());
-		return [...getDefaults(), thunkMiddleware];
+		return [...getDefaults(), thunkMiddleware, apiMiddleware];
 	},
 });
 
