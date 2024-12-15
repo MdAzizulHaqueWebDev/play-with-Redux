@@ -11,9 +11,9 @@ export const store = configureStore({
 		cartItems: cartReducer,
 		wishList: wishListReducer,
 	},
-	// middleware: (getDefaults) => {
-	// 	return [...getDefaults(), thunkMiddleware, apiMiddleware];
-	// },
+	middleware: (getDefaults) => {
+		return [...getDefaults(), apiMiddleware];
+	},
 });
 
 // thunk ki kore , video te 17:20s e bola hoyeche , thunk er jonno amar ekta function dispatch korte parbo redux toolkit e jekane amar sudu ekta plain object dispatch korte pari
