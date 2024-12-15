@@ -25,6 +25,7 @@ const slice = createSlice({
 
 export const { updateAllProducts, fetchProducts, fetchProductsError } =
 	slice.actions;
+// Thunk Action Creator
 export const fetchAllProducts = () => (dispatchs) => {
 	dispatchs(fetchProducts());
 	fetch("http://localhost:3000/products")

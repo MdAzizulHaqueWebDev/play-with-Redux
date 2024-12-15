@@ -64,6 +64,8 @@ export const {
 	increaseCartItemQuantity,
 	decreaseCartItemQuantity,
 } = slice.actions;
+
+// Thunk Action Creator
 const { fetchCartItemsError, fetchCartItems, loadCartItems } = slice.actions;
 export const fetchCarts = () => (dispatch) => {
 	dispatch(fetchCartItems());
