@@ -19,8 +19,13 @@ export const apiMiddleware =
 				.catch((err) => {
 					dispatch({
 						type: onError,
-						payload: err || "something went wrong",
+						payload: err?.message || "something went wrong",
 					});
 				});
 		} else next(action);
 	};
+
+export const fetchAPIAction = (payload) => ({
+	type: "api/make-call",
+	payload,
+});

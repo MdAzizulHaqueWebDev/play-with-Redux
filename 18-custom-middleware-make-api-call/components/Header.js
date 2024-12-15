@@ -12,38 +12,27 @@ import {
 	fetchCartItemsError,
 	loadCartItems,
 } from "../store/slices/cartSlice";
+import { fetchAPIAction } from "../store/middleware/API_Middleware";
 
 export default function Header() {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch({
-			type: "api/make-call",
-			payload: {
+		dispatch(
+			fetchAPIAction({
 				path: "/products",
 				onSuccess: updateAllProducts.type,
 				onLoading: fetchProducts.type,
 				onError: fetchProductsError.type,
-			},
-		});
-		// dispatch(fetchProducts());
-		// fetch("http://localhost:3000/products")
-		// 	.then((res) => res.json())
-		// 	.then((data) => {
-		// 		console.log(data);
-		// 		dispatch(updateAllProducts(data));
-		// 	})
-		// 	.catch(() => {
-		// 		dispatch(fetchProductsError());
-		// 	});
-		// dispatch(fetchCartItems());
-		// fetch("http://localhost:3000/carts/5")
-		// 	.then((res) => res.json())
-		// 	.then((data) => {
-		// 		dispatch(loadCartItems(data));
-		// 	})
-		// 	.catch(() => {
-		// 		dispatch(fetchCartItemsError());
-		// 	});
+			}),
+		);
+		dispatch(
+			fetchAPIAction({
+				path: "/carts/23",
+				onSuccess: loadCartItems.type,
+				onLoading: fetchCartItems.type,
+				onError: fetchCartItemsError.type,
+			}),
+		);
 	}, []);
 	const cartItems = useSelector((state) => state.cartItems.list);
 	return (
