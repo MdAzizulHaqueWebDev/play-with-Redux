@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const api = createApi({
+export const aliasapi = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: "http://localhost:3000",
 	}),
@@ -24,28 +24,43 @@ export const api = createApi({
 					};
 				},
 				invalidatesTags: ["TASK"],
-				async onQueryStarted(updatedTask, { dispatch, queryFulfilled }) {
+				async onQueryStarted(newTask, { dispatch, queryFulfilled }) {
 					// Optimistically update the cache
 					const patchResult = dispatch(
-					  api.util.updateQueryData('getTasks', undefined, (draft) => {
-					draft.unshift(updatedTask) 
-					})
+						aliasapi.util.updateQueryData("getTasks", undefined, (draft) => {
+							draft.unshift(newTask);
+						}),
 					);
 					try {
-					  await queryFulfilled;
+						await queryFulfilled;
 					} catch {
-					  // Rollback the cache update on failure
-					  patchResult.undo();
+						// Rollback the cache update on failure
+						patchResult.undo();
 					}
-				  },
+				},
 			}),
 			updateTask: builder.mutation({
-				query: ({ id, ...updatedTask }) => ({
-					url: `/tasks/${id}`,
+				query: (updatedTask) => ({
+					url: `/tasks/${updatedTask.id}`,
 					method: "PATCH",
 					body: updatedTask,
 				}),
 				invalidatesTags: ["TASK"],
+				async onQueryStarted(updatedTask, { dispatch, queryFulfilled }) {
+					// Optimistically update the cache
+					const patchResult = dispatch(
+						aliasapi.util.updateQueryData("getTasks", undefined, (draft) => {
+							const taskIndx = draft.findIndex((t) => t.id === updatedTask.id);
+							draft[taskIndx] = { ...draft[taskIndx], ...updatedTask };
+						}),
+					);
+					try {
+						await queryFulfilled;
+					} catch {
+						// Rollback the cache update on failure
+						patchResult.undo();
+					}
+				},
 			}),
 			deleteTask: builder.mutation({
 				query: (id) => ({
@@ -63,6 +78,6 @@ export const {
 	useAddTaskMutation,
 	useUpdateTaskMutation,
 	useDeleteTaskMutation,
-} = api;
+} = aliasapi;
 
-console.log(api.util);
+console.log(aliasapi);

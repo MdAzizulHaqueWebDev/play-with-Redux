@@ -4,16 +4,19 @@ import Home from "./Home.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import "./index.css";
-import { ApiProvider } from "@reduxjs/toolkit/query/react";
-import { api } from "./RTK_Queries/apiSlice.js";
+import { store } from "./store/index.js";
+import { Provider } from "react-redux";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: (
-			<ApiProvider api={api}>
+			// <ApiProvider api={api} >
+			// 	<App />
+			// </ApiProvider>
+			<Provider store={store}>
 				<App />
-			</ApiProvider>
+			</Provider>
 		),
 		children: [
 			{
