@@ -1,59 +1,53 @@
 import { useEffect, useState } from "react";
 import Task from "./TaskItem";
 import { Link } from "react-router-dom";
+import {
+	useAddTaskMutation,
+	useDeleteTaskMutation,
+	useGetTasksQuery,
+	useUpdateTaskMutation,
+} from "./RTK_Queries/apiSlice";
 
 export default function Home() {
-	const [tasksList, setTasksList] = useState([]);
 	const [newTask, setNewTask] = useState("");
-	const [isLoading, setIsLoading] = useState(false);
-	const [isError, setIsError] = useState(false);
-	const [error, setError] = useState(null);
+	// const [tasksList, setTasksList] = useState([]);
+	// const [isLoading, setIsLoading] = useState(false);
+	// const [isError, setIsError] = useState(false);
+	// const [error, setError] = useState(null);
 
 	const BASE_URL = "http://localhost:3000";
-	const getTasks = async () => {
-		try {
-			const response = await fetch(`${BASE_URL}/tasks`);
-			const tasks = await response.json();
-			setTasksList(tasks.reverse());
-		} catch (err) {
-			setIsLoading(false);
-			setIsError(true);
-			setError(err);
-		}
-	};
-	useEffect(() => {
-		setIsLoading(true);
-		getTasks().then(() => setIsLoading(false));
-	}, []);
+	// const getTasks = async () => {
+	// 	try {
+	// 		const response = await fetch(`${BASE_URL}/tasks`);
+	// 		const tasks = await response.json();
+	// 		setTasksList(tasks.reverse());
+	// 	} catch (err) {
+	// 		setIsLoading(false);
+	// 		setIsError(true);
+	// 		setError(err);
+	// 	}
+	// };
+	const { data: tasksList, error, isError, isLoading } = useGetTasksQuery();
 
-	const addTask = async (task) => {
-		await fetch(`${BASE_URL}/tasks`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(task),
-		});
-		getTasks();
-	};
+	const [addTask, mutationStates] = useAddTaskMutation();
+	const [updateTask] = useUpdateTaskMutation();
 
-	const updateTask = async ({ id, ...updatedTask }) => {
-		await fetch(`${BASE_URL}/tasks/${id}`, {
-			method: "PATCH",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(updatedTask),
-		});
-		getTasks();
-	};
+	// const updateTask = async ({ id, ...updatedTask }) => {
+	// 	await fetch(`${BASE_URL}/tasks/${id}`, {
+	// 		method: "PATCH",
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 		body: JSON.stringify(updatedTask),
+	// 	});
+	// };
 
-	const deleteTask = async (id) => {
-		await fetch(`${BASE_URL}/tasks/${id}`, {
-			method: "DELETE",
-		});
-		getTasks();
-	};
+	const [deleteTask] = useDeleteTaskMutation()
+	// const deleteTask = async (id) => {
+	// 	await fetch(`${BASE_URL}/tasks/${id}`, {
+	// 		method: "DELETE",
+	// 	});
+	// };
 
 	return (
 		<div className="flex h-screen flex-grow items-start justify-center bg-gray-900 p-4">
@@ -83,6 +77,7 @@ export default function Home() {
 							completed: false,
 						};
 						addTask(task);
+						// refetch()
 						setNewTask("");
 					}}
 					className="my-2 flex h-8 w-full items-center rounded border-2 border-solid border-gray-700 px-2 text-sm font-medium"
