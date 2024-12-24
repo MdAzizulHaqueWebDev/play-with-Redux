@@ -3,7 +3,7 @@
     {
       "id": 1,
       "value": "Buy groceries",
-      "completed": false
+      "completed": true
     },
     {
       "id": 2,
